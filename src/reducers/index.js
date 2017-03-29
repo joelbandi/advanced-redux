@@ -3,10 +3,6 @@ import { combineReducers } from 'redux';
 import tasksReducer from '../ducks/tasksDuck'
 import currentTaskReducer from '../ducks/currentTaskDuck'
 
-import * as widgetActions from '../ducks/tasksDuck';
-
-
-console.log(widgetActions);
 
 // This controls the shape of the global state
 const rootReducer = combineReducers({
