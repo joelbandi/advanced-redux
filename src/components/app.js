@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getInitialTasks, setAsCurrent, addATask, doneTask, undoTask } from '../actions'
+import { getInitialTasks, addATask, doneTask, undoTask } from '../ducks/tasksDuck'
+import { setAsCurrent } from '../ducks/currentTaskDuck'
 
 
 //components
