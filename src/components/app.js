@@ -1,27 +1,45 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { getInitialTasks, addATask, doneTask, undoTask } from '../ducks/tasksDuck'
-import { setAsCurrent } from '../ducks/currentTaskDuck'
+import { connectModule } from 'redux-modules';
 
+import getData from '../data';
 
 //components
 import CurrentTask from './currentTask';
 import Task from './task';
 
+// import the modules
+import tasksModule from '../modules/tasksModule';
+import currentTaskModule from '../modules/currentTaskModule';
+
+@connectModule([tasksModule,currentTaskModule])
 class App extends Component {
   
   componentWillMount() {
-    this.props.getInitialTasks();
+    this.props.actions.tasks.getInitialTasks(getData());
   }
   
   render() {
+
+    const {
+      actions:{
+        tasks:{
+          addATask,
+          doneTask,
+          undoTask
+        },
+        currentTask:{
+            setAsCurrent
+        }
+      }
+    } = this.props;
+
+
     return (
       <div>
         <h1>Task Manager</h1>
         
 
-        <CurrentTask setAsCurrent={this.props.setAsCurrent} 
+        <CurrentTask setAsCurrent={setAsCurrent} 
                      currentTask={this.props.currentTask}/>        
 
 
@@ -31,9 +49,9 @@ class App extends Component {
               <Task 
                 key={task.name}
                 task={task}
-                doneTask={this.props.doneTask}
-                undoTask={this.props.undoTask}
-                setAsCurrent={this.props.setAsCurrent}
+                doneTask={doneTask}
+                undoTask={undoTask}
+                setAsCurrent={setAsCurrent}
               />
             );
           })}
@@ -44,7 +62,7 @@ class App extends Component {
           <input id="newtaskname" type="text" className="form-control" placeholder="Search for..."/>
           <span className="input-group-btn">
             <button className="btn btn-success" onClick={() => {
-              this.props.addATask({
+              addATask({
                 name:document.getElementById("newtaskname") ? document.getElementById("newtaskname").value : "",
                 done:false
               })  
@@ -57,21 +75,5 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    tasks: state.tasks,
-    currentTask: state.currentTask
-  }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    getInitialTasks,
-    setAsCurrent,
-    addATask,
-    doneTask,
-    undoTask
-  },dispatch)
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default App
