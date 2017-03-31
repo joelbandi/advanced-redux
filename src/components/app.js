@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connectModule } from 'redux-modules';
 
-import getData from '../data';
+import { getData } from '../data';
 
 //components
 import CurrentTask from './currentTask';

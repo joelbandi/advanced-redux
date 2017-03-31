@@ -29,10 +29,27 @@ const data = [
   },
 ];
 
-const getData = () => {
+export const getData = () => {
   return new Promise((resolve,reject) => {
     resolve(data)
   }) 
 }
-
-export default getData;
+/**
+ * A thunk is a function that returns a function containing the things we need to do so we can execute it 
+ * at a time of our choosing.
+ * In Redux, You can use thunkified action creators that return a functions that can used to perform asynchronous actions!
+ */
+export const thunkGetModifiedData = () => {
+  // functiona and getState are automatically passed to function by the redux-thunk middleware!
+  // This might come handy !!
+  return function(dispatch,getState) {
+    console.log('from a thunk->',getState().tasks);
+    dispatch(() => {
+      // function that return an action 
+      return {
+        type: 'something',
+        payload: {}
+      }
+    })
+  }
+}

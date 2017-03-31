@@ -9,9 +9,10 @@ import App from './components/app';
 //middleware
 import ReduxPromise from 'redux-promise';
 import ReduxLogger from 'redux-logger';
+import ReduxThunk from 'redux-thunk';
 
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise,ReduxLogger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk,ReduxPromise,ReduxLogger)(createStore);
 
 ReactDOM.render(
   <ModuleProvider store={createStoreWithMiddleware(state => state,{})}>
