@@ -6,7 +6,7 @@ export default createModule({
   selector: state => state.tasks,
   transformations: {
     getInitialTasks: {
-      reducer: (state,action) => action.payload
+      reducer: (state,action) => state
     },
     addATask: {
       reducer: (state,action) => [...state,action.payload]
@@ -16,6 +16,9 @@ export default createModule({
     },
     undoTask: {
       reducer: (state,action) => [{name:action.payload.name,done:false},...state.filter((task) => task.name !== action.payload.name)]
+    },
+    setInitialTasks: {
+      reducer: (state,action) => action.payload
     }
   }
 });

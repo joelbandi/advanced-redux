@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connectModule } from 'redux-modules';
 
-import { getData } from '../data';
 
 //components
 import CurrentTask from './currentTask';
@@ -15,7 +14,7 @@ import currentTaskModule from '../modules/currentTaskModule';
 class App extends Component {
   
   componentWillMount() {
-    this.props.actions.tasks.getInitialTasks(getData());
+    this.props.actions.tasks.getInitialTasks();
   }
   
   render() {

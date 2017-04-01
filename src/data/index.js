@@ -31,9 +31,14 @@ const data = [
 
 export const getData = () => {
   return new Promise((resolve,reject) => {
-    resolve(data)
+    setTimeout(function() {
+      resolve(data);
+    }, 350);
   }) 
 }
+
+
+
 /**
  * A thunk is a function that returns a function containing the things we need to do so we can execute it 
  * at a time of our choosing.
