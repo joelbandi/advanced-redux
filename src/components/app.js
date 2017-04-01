@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connectModule } from 'redux-modules';
 
-import { getData } from '../data';
+import { getData, thunkGetData } from '../data';
+import { store } from '../index'
 
 //components
 import CurrentTask from './currentTask';
@@ -15,11 +16,10 @@ import currentTaskModule from '../modules/currentTaskModule';
 class App extends Component {
   
   componentWillMount() {
-    this.props.actions.tasks.getInitialTasks(getData());
+    store.dispatch(thunkGetData());
   }
   
   render() {
-
     const {
       actions:{
         tasks:{

@@ -13,9 +13,9 @@ import ReduxThunk from 'redux-thunk';
 
 
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk,ReduxPromise,ReduxLogger)(createStore);
-
+export const store = createStoreWithMiddleware(state => state,{});
 ReactDOM.render(
-  <ModuleProvider store={createStoreWithMiddleware(state => state,{})}>
+  <ModuleProvider store={store}>
     <App />
   </ModuleProvider>
   , document.querySelector('.container'));
